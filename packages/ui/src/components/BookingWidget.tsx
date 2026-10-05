@@ -50,10 +50,25 @@ export interface BookingLabels {
   demoNote: string;
   errorName: string;
   errorPhone: string;
+  /** Sólo modo "experience": sufijo del precio ("per persona") */
+  perPerson?: string;
+  /** Sólo modo "experience": etiqueta del total */
+  total?: string;
+  /** Sólo si se pasan `visitLanguages`: etiqueta del selector */
+  visitLanguage?: string;
+}
+
+export interface VisitLanguage {
+  id: string;
+  label: string;
 }
 
 export interface BookingWidgetProps {
-  mode: 'table' | 'appointment';
+  /**
+   * table: mesa (comensales + hora) · appointment: servicio + profesional + hora ·
+   * experience: actividad con precio por persona (actividad + personas + hora), p. ej. visita a un celler
+   */
+  mode: 'table' | 'appointment' | 'experience';
   brand: string;
   locale: string;
   labels: BookingLabels;
@@ -64,7 +79,11 @@ export interface BookingWidgetProps {
   maxGuests?: number;
   /** Importe a partir del cual se pide garantía con tarjeta (sólo demo) */
   guaranteeFrom?: number;
+  /** Idiomas en los que se ofrece la actividad (modo experience) */
+  visitLanguages?: VisitLanguage[];
 }
+
+const REF_PREFIX: Record<BookingWidgetProps['mode'], string> = { table: 'R', appointment: 'C', experience: 'V' };
 
 type Step = 'service' | 'staff' | 'when' | 'details' | 'done';
 
@@ -78,9 +97,11 @@ export default function BookingWidget(props: BookingWidgetProps) {
   const staff = props.staff ?? [];
   const money = (value: number) =>
     new Intl.NumberFormat(locale, { style: 'currency', currency: 'EUR', minimumFractionDigits: value % 1 === 0 ? 0 : 2 }).format(value);
+  const visitLanguages = props.visitLanguages ?? [];
+  const hasGuests = mode !== 'appointment';
   const steps: Step[] = useMemo(() => {
     const list: Step[] = [];
-    if (mode === 'appointment' && services.length) list.push('service');
+    if (mode !== 'table' && services.length) list.push('service');
     if (mode === 'appointment' && staff.length) list.push('staff');
     list.push('when', 'details');
     return list;
@@ -90,6 +111,7 @@ export default function BookingWidget(props: BookingWidgetProps) {
   const [serviceId, setServiceId] = useState(services[0]?.id ?? '');
   const [staffId, setStaffId] = useState('any');
   const [guests, setGuests] = useState(2);
+  const [visitLang, setVisitLang] = useState(visitLanguages[0]?.id ?? '');
   const dates = useMemo(() => upcomingDates(14, hours), [hours]);
   const [dateISO, setDateISO] = useState(() => toISODate(dates[0] ?? new Date()));
   const [time, setTime] = useState('');
@@ -107,10 +129,9 @@ export default function BookingWidget(props: BookingWidgetProps) {
     () => slotsForDate(selectedDate, hours, slotMinutes, mode === 'table' ? 0.4 : 0.3, `${serviceId}|${staffId}`),
     [selectedDate, hours, slotMinutes, mode, serviceId, staffId],
   );
+  const totalPrice = service ? service.price * (mode === 'experience' ? guests : 1) : 0;
   const needsGuarantee =
-    mode === 'table'
-      ? guests >= 6
-      : props.guaranteeFrom !== undefined && !!service && service.price >= props.guaranteeFrom;
+    mode === 'table' ? guests >= 6 : props.guaranteeFrom !== undefined && !!service && totalPrice >= props.guaranteeFrom;
 
   const canContinue =
     step === 'when' ? !!time : step === 'service' ? !!serviceId : true;
@@ -129,8 +150,8 @@ export default function BookingWidget(props: BookingWidgetProps) {
     if (!/^[+\d][\d\s]{7,}$/.test(phone.trim())) nextErrors.phone = labels.errorPhone;
     setErrors(nextErrors);
     if (Object.keys(nextErrors).length) return;
-    const ref = referenceCode(mode === 'table' ? 'R' : 'C');
-    persistRecord({ type: mode, ref, brand, date: dateISO, time, guests, serviceId, staffId, name, phone, notes });
+    const ref = referenceCode(REF_PREFIX[mode]);
+    persistRecord({ type: mode, ref, brand, date: dateISO, time, guests, serviceId, staffId, visitLang, name, phone, notes });
     setReference(ref);
   }
 
@@ -145,13 +166,15 @@ export default function BookingWidget(props: BookingWidgetProps) {
   }
 
   const dateLong = formatDateLong(selectedDate, locale);
+  const guestsText = `${guests} ${guests === 1 ? labels.guestSingular : labels.guestPlural}`;
+  const detailText =
+    mode === 'table' ? guestsText : mode === 'experience' ? `${service?.name ?? ''} · ${guestsText}` : service?.name;
   const summaryParts = [
-    mode === 'table'
-      ? `${guests} ${guests === 1 ? labels.guestSingular : labels.guestPlural}`
-      : service?.name,
+    detailText,
     selectedStaff && staffId !== 'any' ? selectedStaff.name : undefined,
     dateLong,
     time,
+    mode === 'experience' && visitLang ? visitLanguages.find((l) => l.id === visitLang)?.label : undefined,
   ].filter(Boolean);
 
   return (
@@ -201,7 +224,10 @@ export default function BookingWidget(props: BookingWidgetProps) {
                     {s.durationMinutes} {labels.minutesShort}
                   </span>
                 </span>
-                <span class="font-semibold">{money(s.price)}</span>
+                <span class="text-right">
+                  <span class="block font-semibold">{money(s.price)}</span>
+                  {mode === 'experience' && labels.perPerson && <span class="text-xs text-muted">{labels.perPerson}</span>}
+                </span>
               </button>
             ))}
           </div>
@@ -236,7 +262,7 @@ export default function BookingWidget(props: BookingWidgetProps) {
 
         {step === 'when' && (
           <div class="grid gap-5">
-            {mode === 'table' && (
+            {hasGuests && (
               <div>
                 <span class="label">{labels.guests}</span>
                 <div class="flex flex-wrap gap-2">
@@ -314,9 +340,35 @@ export default function BookingWidget(props: BookingWidgetProps) {
 
         {step === 'details' && (
           <form class="grid gap-4" onSubmit={confirm} noValidate>
-            <p class="rounded-xl bg-paper px-4 py-3 text-sm">
+            <p class="flex flex-wrap items-baseline justify-between gap-2 rounded-xl bg-paper px-4 py-3 text-sm">
               <strong class="font-semibold">{summaryParts.join(' · ')}</strong>
+              {mode === 'experience' && service && (
+                <span class="text-muted">
+                  {labels.total ? `${labels.total}: ` : ''}
+                  <strong class="font-semibold text-ink">{money(totalPrice)}</strong>
+                </span>
+              )}
             </p>
+            {visitLanguages.length > 0 && (
+              <div>
+                <span class="label">{labels.visitLanguage}</span>
+                <div class="flex flex-wrap gap-2">
+                  {visitLanguages.map((l) => (
+                    <button
+                      key={l.id}
+                      type="button"
+                      onClick={() => setVisitLang(l.id)}
+                      aria-pressed={visitLang === l.id}
+                      class={`rounded-full border px-3 py-1.5 text-sm ${
+                        visitLang === l.id ? 'border-accent bg-accent text-white' : 'border-line hover:border-ink/40'
+                      }`}
+                    >
+                      {l.label}
+                    </button>
+                  ))}
+                </div>
+              </div>
+            )}
             <div class="grid gap-4 sm:grid-cols-2">
               <div>
                 <label class="label" for="bk-name">

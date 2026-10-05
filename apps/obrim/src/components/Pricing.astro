@@ -1,11 +1,15 @@
 ---
-import { whatsappLink } from '@obrim/ui/config';
+import { CONTACT, whatsappLink } from '@obrim/ui/config';
+import { localizePath, type Lang } from '@obrim/ui/i18n';
 import type { Dictionary } from '../i18n';
 
 interface Props {
+  lang: Lang;
   t: Dictionary;
 }
-const { t } = Astro.props;
+const { lang, t } = Astro.props;
+const celler = t.pricing.celler;
+const cellerDemoHref = CONTACT.demos.celler + localizePath('/', lang);
 ---
 
 <section id="pricing" class="container-x py-16 sm:py-24">
@@ -47,6 +51,37 @@ const { t } = Astro.props;
       ))
     }
   </div>
+
+  <!-- Plan vertical para cellers: el sector con más potencial de la comarca -->
+  <article class="card mt-6 grid gap-8 overflow-hidden p-6 sm:p-8 lg:grid-cols-[1fr_1.4fr]" style="border-color:#9a6b1f">
+    <div>
+      <p class="eyebrow" style="color:#9a6b1f">{celler.eyebrow}</p>
+      <h3 class="mt-2 font-display text-3xl">{celler.name}</h3>
+      <p class="mt-2 text-muted">{celler.for}</p>
+      <p class="mt-6">
+        <span class="font-display text-4xl font-semibold tracking-tight">{celler.monthly}</span>
+        <span class="text-muted">{t.pricing.monthly}</span>
+      </p>
+      <p class="mt-1 text-sm text-muted">
+        {t.pricing.setup}: {celler.setupFrom ? `${t.pricing.from} ` : ''}
+        <span class="font-medium text-ink">{celler.setup}</span>
+      </p>
+      <div class="mt-6 flex flex-wrap gap-3">
+        <a href="#audit" class="btn-primary">{t.nav.cta}</a>
+        <a href={cellerDemoHref} target="_blank" rel="noopener" class="btn-secondary">{celler.cta} →</a>
+      </div>
+    </div>
+    <ul class="grid gap-3 text-sm sm:grid-cols-2 lg:content-center">
+      {
+        celler.features.map((f) => (
+          <li class="flex gap-2">
+            <span aria-hidden="true" class="mt-0.5" style="color:#9a6b1f">✓</span>
+            <span>{f}</span>
+          </li>
+        ))
+      }
+    </ul>
+  </article>
 
   <div class="card mt-6 grid gap-6 bg-paper p-6 sm:grid-cols-[1fr_auto] sm:items-center sm:p-8">
     <div>

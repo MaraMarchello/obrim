@@ -50,9 +50,18 @@ const BOOKING_PLATFORMS: Record<string, RegExp> = {
   Calendly: /calendly/i,
   Timify: /timify/i,
   Bookeo: /bookeo/i,
+  // Plataformas de enoturismo habituales en el Penedès
+  Winetourism: /winetourism\.com/i,
+  'Ruta del Vi': /rutadelvipenedes|rutadelvino/i,
+  Civitatis: /civitatis/i,
+  GetYourGuide: /getyourguide/i,
+  Viator: /viator\.com/i,
+  Turitop: /turitop/i,
+  Bookinglayer: /bookinglayer/i,
 };
 
-const BOOKING_WORDS = /\b(reserva|reservar|reserves|reservas|cita|cites|citas|comanda|comandes|pedido|pedidos|book(ing)?|order( online)?|appointment|agenda(r)?)\b/i;
+const BOOKING_WORDS =
+  /\b(reserva|reservar|reserves|reservas|cita|cites|citas|comanda|comandes|pedido|pedidos|book(ing)?|order( online)?|appointment|agenda(r)?|visita|visites|visitas|tast|tastos|cata|catas|tasting|enoturisme|enoturismo|wine tour)\b/i;
 const HOURS_WORDS = /\b(horari|horario|opening hours|hours|obert|abierto|open|dilluns|dimarts|lunes|martes|monday|tuesday|\d{1,2}[:.]\d{2}\s*[–-]\s*\d{1,2}[:.]\d{2})\b/i;
 const PRIVACY_WORDS = /privaci|privacy|protecci[oó]n? de dades|protecci[oó]n de datos|rgpd|gdpr/i;
 const LEGAL_WORDS = /av[ií]s legal|aviso legal|legal notice|nota legal|condicions|condiciones|terms/i;

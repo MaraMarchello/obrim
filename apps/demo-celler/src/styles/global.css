@@ -1,0 +1,11 @@
+@import 'tailwindcss';
+@import '../../../../packages/ui/src/styles/theme.css';
+@source '../../../../packages/ui/src';
+
+/* Identidad propia de la demo: oro de xarel·lo sobre papel cálido */
+@theme {
+  --color-accent: #9a6b1f;
+  --color-accent-strong: #7d5617;
+  --color-accent-soft: #f5ecd9;
+  --color-paper: #f9f6ef;
+}

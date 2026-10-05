@@ -2,7 +2,7 @@
   "name": "obrim-monorepo",
   "private": true,
   "version": "0.1.0",
-  "description": "Obrim — webs amb reserves, comandes i cites per a negocis de barri (Barcelona)",
+  "description": "Obrim — webs amb reserves, comandes i cites per a negocis de l'Alt Penedès (Vilafranca, Pacs i comarca)",
   "workspaces": [
     "packages/*",
     "apps/*",
@@ -12,11 +12,13 @@
     "dev:obrim": "npm run dev -w @obrim/site",
     "dev:restaurant": "npm run dev -w @obrim/demo-restaurant",
     "dev:salon": "npm run dev -w @obrim/demo-salon",
-    "build": "npm run build -w @obrim/site -w @obrim/demo-restaurant -w @obrim/demo-salon",
+    "dev:celler": "npm run dev -w @obrim/demo-celler",
+    "build": "npm run build -w @obrim/site -w @obrim/demo-restaurant -w @obrim/demo-salon -w @obrim/demo-celler",
     "build:obrim": "npm run build -w @obrim/site",
     "build:restaurant": "npm run build -w @obrim/demo-restaurant",
     "build:salon": "npm run build -w @obrim/demo-salon",
-    "check": "npm run check -w @obrim/site -w @obrim/demo-restaurant -w @obrim/demo-salon",
+    "build:celler": "npm run build -w @obrim/demo-celler",
+    "check": "npm run check -w @obrim/site -w @obrim/demo-restaurant -w @obrim/demo-salon -w @obrim/demo-celler",
     "audit": "tsx tools/audit/src/cli.ts"
   },
   "engines": {

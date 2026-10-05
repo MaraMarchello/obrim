@@ -29,8 +29,17 @@ const jsonLd = {
   email: CONTACT.email,
   telephone: `+${CONTACT.whatsappNumber}`,
   description: t.meta.description,
-  areaServed: { '@type': 'City', name: 'Barcelona' },
-  address: { '@type': 'PostalAddress', addressLocality: 'Barcelona', addressRegion: 'Catalunya', addressCountry: 'ES' },
+  areaServed: [
+    { '@type': 'AdministrativeArea', name: CONTACT.area.comarca },
+    ...CONTACT.area.towns.map((name) => ({ '@type': 'City', name })),
+  ],
+  address: {
+    '@type': 'PostalAddress',
+    addressLocality: CONTACT.area.base,
+    postalCode: CONTACT.area.postalCode,
+    addressRegion: 'Barcelona',
+    addressCountry: 'ES',
+  },
   founder: { '@type': 'Person', name: CONTACT.founder.name, sameAs: [CONTACT.github] },
   priceRange: '€€',
   knowsLanguage: ['ca', 'es', 'en'],
@@ -44,7 +53,7 @@ const jsonLd = {
     <Pains t={t} />
     <Demos lang={lang} t={t} />
     <HowItWorks t={t} />
-    <Pricing t={t} />
+    <Pricing lang={lang} t={t} />
     <AuditForm t={t} />
     <About t={t} />
     <Faq t={t} />

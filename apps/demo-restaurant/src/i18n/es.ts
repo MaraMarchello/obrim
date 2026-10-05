@@ -2,15 +2,15 @@ import type { Dictionary } from './ca';
 
 export const es: Dictionary = {
   meta: {
-    title: 'Can Roure — Cocina catalana de mercado en Gràcia · Reserva y pide online',
+    title: 'Can Roure — Cocina catalana de mercado en Vilafranca del Penedès · Reserva y pide online',
     description:
-      'Restaurante de cocina catalana de mercado en el corazón de Gràcia. Reserva mesa o haz tu pedido para llevar online, sin llamar.',
+      'Restaurante de cocina catalana de mercado en el corazón de Vilafranca del Penedès. Reserva mesa o haz tu pedido para llevar online, sin llamar.',
   },
   nav: { menu: 'La carta', reserve: 'Reservar', order: 'Para llevar', info: 'Dónde estamos' },
   hero: {
-    eyebrow: 'Cocina catalana de mercado · Gràcia, Barcelona',
+    eyebrow: 'Cocina catalana de mercado · Vilafranca del Penedès, Alt Penedès',
     title: 'Platos de siempre, producto de hoy.',
-    subtitle: 'Cocinamos lo que trae el mercado de l’Abaceria cada mañana. Reserva mesa o pide para llevar desde aquí mismo.',
+    subtitle: 'Cocinamos lo que trae el mercado de Sant Salvador cada mañana. Reserva mesa o pide para llevar desde aquí mismo.',
     reserve: 'Reservar mesa',
     order: 'Pedir para llevar',
     openNow: 'Abierto hoy · 13:00–16:00 y 20:00–23:00',
@@ -27,18 +27,18 @@ export const es: Dictionary = {
   },
   info: {
     eyebrow: 'Dónde estamos',
-    title: 'Carrer de Verdi, 00 · Gràcia',
+    title: 'Carrer de la Parellada, 00 · Vilafranca del Penedès',
     hoursTitle: 'Horario',
     hours: ['Martes a sábado · 13:00–16:00 y 20:00–23:00', 'Domingo · 13:00–16:00', 'Lunes cerrado'],
     contactTitle: 'Contacto',
     mapLabel: 'Abrir en Google Maps',
-    transport: 'Metro L3 Fontana · Bus V17, 22, 24',
+    transport: 'Rodalies R4 Vilafranca del Penedès, 5 min a pie · Parking de la plaça del Penedès',
   },
   reviews: {
     eyebrow: 'Opiniones',
     items: [
       { text: 'El fricandó com el de la meva àvia. I poder reservar des del mòbil a les 23 h, impagable.', author: 'Núria P.', source: 'Google' },
-      { text: 'Finally a place in Gràcia with the menu in English and allergens clearly marked. Booked a table in 20 seconds.', author: 'James R.', source: 'Google' },
+      { text: 'Finally a place in Vilafranca with the menu in English and allergens clearly marked. Booked a table in 20 seconds.', author: 'James R.', source: 'Google' },
       { text: 'Pedimos para llevar con Bizum y estaba listo a la hora. Las croquetas, de otro planeta.', author: 'Carla M.', source: 'Google' },
     ],
   },

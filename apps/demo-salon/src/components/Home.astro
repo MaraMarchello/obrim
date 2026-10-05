@@ -14,7 +14,7 @@ interface Props {
 const { lang } = Astro.props;
 const t = useDictionary(lang);
 const BRAND = 'Estudi Aran';
-const ADDRESS = 'Carrer de Pujades, 00, 08005 Barcelona';
+const ADDRESS = 'Rambla de Nostra Senyora, 00, 08720 Vilafranca del Penedès';
 const mapsHref = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(ADDRESS)}`;
 const services = servicesFor(lang);
 const grouped = servicesGrouped(lang);
@@ -25,7 +25,7 @@ const jsonLd = {
   '@context': 'https://schema.org',
   '@type': 'HairSalon',
   name: BRAND,
-  address: { '@type': 'PostalAddress', streetAddress: 'Carrer de Pujades, 00', addressLocality: 'Barcelona', postalCode: '08005', addressCountry: 'ES' },
+  address: { '@type': 'PostalAddress', streetAddress: 'Rambla de Nostra Senyora, 00', addressLocality: 'Vilafranca del Penedès', postalCode: '08720', addressRegion: 'Barcelona', addressCountry: 'ES' },
   priceRange: '€€',
   openingHoursSpecification: [
     { '@type': 'OpeningHoursSpecification', dayOfWeek: ['Tuesday', 'Wednesday', 'Thursday', 'Friday'], opens: '10:00', closes: '20:00' },

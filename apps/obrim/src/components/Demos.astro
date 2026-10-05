@@ -10,6 +10,7 @@ interface Props {
 const { lang, t } = Astro.props;
 
 const demos = [
+  { ...t.demos.celler, href: CONTACT.demos.celler + localizePath('/', lang), accent: '#9a6b1f', tag: 'Visites · Botiga' },
   { ...t.demos.restaurant, href: CONTACT.demos.restaurant + localizePath('/', lang), accent: '#3e6b4f', tag: 'Reserves · Comandes' },
   { ...t.demos.salon, href: CONTACT.demos.salon + localizePath('/', lang), accent: '#8a4b6b', tag: 'Cites' },
 ];
@@ -21,7 +22,7 @@ const demos = [
     <h2 class="h-section mt-3">{t.demos.title}</h2>
     <p class="mt-4 text-muted">{t.demos.body}</p>
   </div>
-  <div class="mt-12 grid gap-6 md:grid-cols-2">
+  <div class="mt-12 grid gap-6 md:grid-cols-2 xl:grid-cols-3">
     {
       demos.map((d) => (
         <article class="card flex flex-col overflow-hidden">

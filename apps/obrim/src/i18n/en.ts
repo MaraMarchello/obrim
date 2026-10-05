@@ -2,9 +2,9 @@ import type { Dictionary } from './ca';
 
 export const en: Dictionary = {
   meta: {
-    title: 'Obrim — Websites with bookings, orders and appointments for local businesses · Barcelona',
+    title: 'Obrim — Websites with bookings, orders and appointments for businesses in Alt Penedès · Vilafranca',
     description:
-      'A fast website in Catalan, Spanish and English with online bookings, orders or appointments. No per-booking commissions. Live in 10 days. From €49/month, all inclusive.',
+      'Websites for restaurants, wineries, salons and shops in Vilafranca del Penedès and Alt Penedès. Catalan, Spanish and English, online bookings with no commissions, live in 10 days. From €49/month.',
   },
   nav: {
     pains: 'Why',
@@ -16,13 +16,13 @@ export const en: Dictionary = {
     cta: 'Free audit',
   },
   hero: {
-    eyebrow: 'Websites for local businesses · Barcelona',
+    eyebrow: 'Websites for businesses in Alt Penedès · Vilafranca, Pacs and around',
     title: 'We open your business online. 24 hours a day.',
     subtitle:
-      'A fast website in Catalan, Spanish and English, with online bookings, orders or appointments. No per-booking commissions. Live in 10 days.',
+      'A fast website in Catalan, Spanish and English, with online bookings, orders, appointments or winery visits. No per-booking commissions. Live in 10 days, and I come to your premises.',
     ctaPrimary: 'Get the free audit',
     ctaSecondary: 'See the demos',
-    proofs: ['From €49/month, all inclusive', 'You own the domain and the code', 'Support over WhatsApp'],
+    proofs: ['From €49/month, all inclusive', 'You own the domain and the code', 'Support over WhatsApp, from the Penedès'],
   },
   pains: {
     eyebrow: 'Why now',
@@ -38,32 +38,37 @@ export const en: Dictionary = {
         figure: '36%',
         unit: 'of small businesses have a website',
         title: 'Most do not show up when people search',
-        body: 'In Catalonia only 36% of businesses with fewer than 10 people have a website (Idescat, 2025). Whoever searches "dinner in Gràcia" or "hairdresser near me" finds your competitors.',
+        body: 'In Catalonia only 36% of businesses with fewer than 10 people have a website (Idescat, 2025). Whoever searches "lunch in Vilafranca" or "winery to visit in Penedès" finds your competitors, or a platform that charges commission.',
         source: 'Idescat, ICT in enterprises survey 2025',
       },
       {
-        figure: '46%',
-        unit: 'of bars get English-speaking customers',
-        title: 'Tourists who cannot read the menu',
-        body: 'Barcelona welcomes 16 million tourists a year. Nearly half of bars serve English-speaking customers, yet only 40% can do so. A website in three languages works for you.',
-        source: 'Barcelona City Council, Restaurant survey 2024',
+        figure: '369,000',
+        unit: 'visitors to Penedès wineries a year',
+        title: 'They come from abroad and book on their phone',
+        body: 'Penedès is the third most visited wine route in Spain, with 21% more visitors in 2024. They search in English, want to book the visit online and, if they cannot, go to the winery next door.',
+        source: 'ACEVIN, Winery visitors report 2024 · Penedès Turisme',
       },
     ],
   },
   demos: {
     eyebrow: 'Try it on your phone',
-    title: 'Two real demos. Book a table, order, get an appointment.',
+    title: 'Three real demos. Book a table, order, get an appointment, visit a winery.',
     body: 'These are not mockups: everything works. Open them on your phone and make a booking as one of your customers would.',
     open: 'Open the demo',
     restaurant: {
       name: 'Can Roure',
-      kind: 'Restaurant · Gràcia',
+      kind: 'Restaurant · Vilafranca del Penedès',
       features: ['Menu in 3 languages with allergens', 'Table booking with reminder', 'Takeaway order with Bizum'],
     },
     salon: {
       name: 'Estudi Aran',
-      kind: 'Hair & beauty · Poblenou',
+      kind: 'Hair & beauty · Vilafranca del Penedès',
       features: ['Online appointment by service and stylist', 'WhatsApp reminder', 'Card guarantee against no-shows'],
+    },
+    celler: {
+      name: 'Celler Mas Albareda',
+      kind: 'Winery & wine tourism · Pacs del Penedès',
+      features: ['Tours and tastings priced per person', 'Tour language and group size', 'Wine shop with collection at the winery'],
     },
   },
   how: {
@@ -76,7 +81,7 @@ export const en: Dictionary = {
       },
       {
         title: 'One 60-minute meeting',
-        body: 'At your premises. We talk about the business, I take the photos, we collect texts and logins. I will not ask you for anything else.',
+        body: 'At your premises, in any town in the comarca. We talk about the business, I take the photos, we collect texts and logins. I will not ask you for anything else.',
       },
       {
         title: 'We build, you review',
@@ -135,6 +140,23 @@ export const en: Dictionary = {
         features: ['Catalogue and cart', 'Payments and shipping', 'Verifactu-compatible invoicing', 'Priority support'],
       },
     ],
+    celler: {
+      eyebrow: 'For wineries and wine tourism',
+      name: 'Celler',
+      setup: '€2,900',
+      setupFrom: true,
+      monthly: '€169',
+      for: 'To fill your tours and sell wine without middlemen',
+      features: [
+        'Tours and tastings with online booking: price per person, groups, tour language',
+        'Wine shop with collection at the winery or shipping, Bizum and card',
+        'Catalan, Spanish and English (French optional)',
+        'Harvest and events calendar, gift vouchers',
+        'Google Business profile and structured data so tours show up in results',
+        'Verifactu-compatible invoicing',
+      ],
+      cta: 'See the winery demo',
+    },
     custom: {
       title: 'Companies with 10 to 49 people',
       body: 'Integrations with your CRM or ERP, WCAG 2.1 AA accessibility (mandatory for SMEs since 2025) and a service-level agreement. Custom quote from €4,000.',
@@ -149,8 +171,8 @@ export const en: Dictionary = {
     fields: {
       business: 'Business name',
       type: 'Type of business',
-      types: ['Restaurant, bar or café', 'Hair or beauty salon', 'Clinic or practice', 'Shop', 'Workshop or services', 'Other'],
-      area: 'Neighbourhood or town',
+      types: ['Restaurant, bar or café', 'Winery or wine tourism', 'Hair or beauty salon', 'Clinic or practice', 'Shop or farm shop', 'Workshop or services', 'Rural accommodation', 'Other'],
+      area: 'Town (Vilafranca, Pacs, Sant Sadurní…)',
       phone: 'Your WhatsApp',
       website: 'Current website (if any)',
       optional: 'optional',
@@ -164,12 +186,12 @@ export const en: Dictionary = {
     eyebrow: 'Who is behind it',
     title: 'Hi, I am Marat.',
     body: [
-      'I am a software developer specialised in backend systems (Java, Spring) and web interfaces (React, TypeScript). I live in Barcelona.',
-      'I started Obrim after seeing too many good businesses with websites that do not open on a phone, cannot take a booking and do not speak the language of the person walking through the door. Modern tools make it possible to do this well, fast and at a price a local business can afford.',
-      'I work alone, with collaborators for Catalan proofreading. You will find me at your premises, not in an office.',
+      'I am a software developer specialised in backend systems (Java, Spring) and web interfaces (React, TypeScript). I live in Pacs del Penedès, five minutes from Vilafranca.',
+      'I started Obrim after seeing too many good businesses in the comarca with websites that do not open on a phone, cannot take a booking and do not speak the language of the person walking through the door. Modern tools make it possible to do this well, fast and at a price a village business can afford.',
+      'I work alone, with collaborators for Catalan proofreading. You will find me at your premises, in Vilafranca, Sant Sadurní or any town in Alt Penedès, not in an office.',
     ],
     github: 'Code and projects on GitHub',
-    facts: ['Barcelona', 'Backend · Java & Spring', 'Frontend · React & TypeScript'],
+    facts: ['Pacs del Penedès', 'Backend · Java & Spring', 'Frontend · React & TypeScript'],
   },
   faq: {
     eyebrow: 'Common questions',
@@ -196,17 +218,25 @@ export const en: Dictionary = {
         a: 'Kit Digital is currently closed, and CCAM covers up to 50% of digitalisation for shops and services (max €5,000) when a call is open. I prepare the paperwork so you can apply without the website having to wait.',
       },
       {
+        q: 'Do you come to my town?',
+        a: 'Yes. I work across Alt Penedès: Vilafranca, Pacs, Sant Sadurní, els Monjos, Gelida, Sant Martí Sarroca and every other town in the comarca. The first meeting and the final training always happen at your premises.',
+      },
+      {
+        q: 'I run a winery. What can you build for me?',
+        a: 'Booking of tours and tastings with price per person, group size and tour language; a wine shop with collection or shipping; an events calendar; and your Google Business profile so tours show up directly in search results. Have a look at the Celler Mas Albareda demo: everything you see there works.',
+      },
+      {
         q: 'Why not just use Wix or a booking platform?',
         a: 'You can. But Wix does not export your site (stop paying and it disappears), does not handle Catalan or Spanish regulations, and nobody will come to your premises to set it up. Booking platforms keep the commission and the customer relationship. Keep them to attract new people and bring your regulars to your own channel.',
       },
     ],
   },
   footer: {
-    tagline: 'Websites with bookings, orders and appointments for local businesses.',
+    tagline: 'Websites with bookings, orders and appointments for businesses in Alt Penedès.',
     contact: 'Contact',
     legal: 'Legal',
     legalLinks: { notice: 'Legal notice', privacy: 'Privacy', cookies: 'Cookies' },
-    made: 'Made in Barcelona',
+    made: 'Made in Pacs del Penedès',
   },
   whatsapp: {
     label: 'Message us on WhatsApp',
@@ -216,7 +246,7 @@ export const en: Dictionary = {
     notice: {
       title: 'Legal notice',
       body: [
-        'Website owner: {founder}. Address: Barcelona. Tax ID: [PENDING]. Email: {email}.',
+        'Website owner: {founder}. Address: Pacs del Penedès (Barcelona). Tax ID: [PENDING]. Email: {email}.',
         'This website is informational and commercial in nature. Using the site implies acceptance of these terms.',
         'Contents (texts, images, code) are the property of the owner or of third parties who have authorised their use and are protected by intellectual property law.',
         'The owner is not responsible for the content of third-party websites linked from this site.',
@@ -226,7 +256,7 @@ export const en: Dictionary = {
     privacy: {
       title: 'Privacy policy',
       body: [
-        'Data controller: {founder}, Barcelona, {email}.',
+        'Data controller: {founder}, Pacs del Penedès, {email}.',
         'Data we process: what you voluntarily provide via WhatsApp, email or forms (business name, phone, current website). The form on this site stores nothing: it opens WhatsApp with a message you decide whether to send.',
         'Purpose: to answer your request, prepare the audit and, if agreed, provide the contracted service. Legal basis: consent and pre-contractual measures (art. 6.1.a and b GDPR).',
         'Retention: for the duration of the relationship and thereafter for the legally applicable periods.',

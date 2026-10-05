@@ -13,11 +13,20 @@ export const CONTACT = {
   github: 'https://github.com/MaraMarchello',
   founder: {
     name: 'Marat Nurmukhametov',
-    city: 'Barcelona',
+    city: 'Pacs del Penedès',
+  },
+  /** Zona de actuación: se usa en textos legales y datos estructurados */
+  area: {
+    comarca: 'Alt Penedès',
+    capital: 'Vilafranca del Penedès',
+    base: 'Pacs del Penedès',
+    postalCode: '08796',
+    towns: ['Vilafranca del Penedès', 'Pacs del Penedès', 'Sant Sadurní d’Anoia', 'Santa Margarida i els Monjos', 'Gelida', 'Sant Martí Sarroca'],
   },
   demos: {
     restaurant: import.meta.env?.PUBLIC_DEMO_RESTAURANT_URL ?? 'https://restaurant.obrim.cat',
     salon: import.meta.env?.PUBLIC_DEMO_SALON_URL ?? 'https://salo.obrim.cat',
+    celler: import.meta.env?.PUBLIC_DEMO_CELLER_URL ?? 'https://celler.obrim.cat',
   },
 } as const;
 

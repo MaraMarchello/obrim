@@ -115,7 +115,7 @@ const ITEMS: RawItem[] = [
     id: 'vi-casa',
     category: 'begudes',
     name: { ca: 'Vi de la casa (ampolla)', es: 'Vino de la casa (botella)', en: 'House wine (bottle)' },
-    description: { ca: 'Negre del Penedès, celler familiar.', es: 'Tinto del Penedès, bodega familiar.', en: 'Penedès red from a family winery.' },
+    description: { ca: 'Xarel·lo o negre de cellers de la comarca, DO Penedès.', es: 'Xarel·lo o tinto de bodegas de la comarca, DO Penedès.', en: 'Xarel·lo or red from local wineries, DO Penedès.' },
     price: 14,
     allergens: ['SO2'],
   },

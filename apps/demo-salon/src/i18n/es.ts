@@ -2,13 +2,13 @@ import type { Dictionary } from './ca';
 
 export const es: Dictionary = {
   meta: {
-    title: 'Estudi Aran — Peluquería y estética en Poblenou · Cita online',
+    title: 'Estudi Aran — Peluquería y estética en Vilafranca del Penedès · Cita online',
     description:
-      'Peluquería y estética en Poblenou. Coge cita online con tu profesional, recibe el recordatorio por WhatsApp y olvídate de llamar.',
+      'Peluquería y estética en Vilafranca del Penedès. Coge cita online con tu profesional, recibe el recordatorio por WhatsApp y olvídate de llamar.',
   },
   nav: { services: 'Servicios', team: 'Equipo', book: 'Coger cita', info: 'Dónde estamos' },
   hero: {
-    eyebrow: 'Peluquería y estética · Poblenou, Barcelona',
+    eyebrow: 'Peluquería y estética · Vilafranca del Penedès, Alt Penedès',
     title: 'Tu cita, cuando a ti te va bien.',
     subtitle: 'Elige servicio, profesional y hora. Lo confirmamos al instante y te lo recordamos por WhatsApp el día antes.',
     cta: 'Coger cita',
@@ -42,19 +42,19 @@ export const es: Dictionary = {
   },
   info: {
     eyebrow: 'Dónde estamos',
-    title: 'Carrer de Pujades, 00 · Poblenou',
+    title: 'Rambla de Nostra Senyora, 00 · Vilafranca del Penedès',
     hoursTitle: 'Horario',
     hours: ['Martes a viernes · 10:00–20:00', 'Sábado · 10:00–18:00', 'Domingo y lunes cerrado'],
     contactTitle: 'Contacto',
     mapLabel: 'Abrir en Google Maps',
-    transport: 'Metro L4 Poblenou · Tram T4 Pere IV',
+    transport: 'Rodalies R4 Vilafranca del Penedès, 3 min a pie · Zona azul en la Rambla',
   },
   reviews: {
     eyebrow: 'Opiniones',
     items: [
       { text: 'Vaig agafar cita a les 23 h des del sofà i l’endemà tenia el recordatori. Les metxes, perfectes.', author: 'Laia F.', source: 'Google' },
       { text: 'Por fin una peluquería donde no tengo que llamar tres veces para que me cojan el teléfono.', author: 'Andrea S.', source: 'Google' },
-      { text: 'Booked online in English, chose Marc, got a reminder. Best beard trim in Poblenou.', author: 'Tom H.', source: 'Google' },
+      { text: 'Booked online in English, chose Marc, got a reminder. Best beard trim in Vilafranca.', author: 'Tom H.', source: 'Google' },
     ],
   },
   footer: {

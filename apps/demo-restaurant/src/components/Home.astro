@@ -16,7 +16,7 @@ const { lang } = Astro.props;
 const t = useDictionary(lang);
 const menu = menuFor(lang);
 const BRAND = 'Can Roure';
-const ADDRESS = 'Carrer de Verdi, 00, 08012 Barcelona';
+const ADDRESS = 'Carrer de la Parellada, 00, 08720 Vilafranca del Penedès';
 const mapsHref = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(ADDRESS)}`;
 
 /** Horario partido; cerrado los lunes */
@@ -35,7 +35,7 @@ const jsonLd = {
   '@type': 'Restaurant',
   name: BRAND,
   servesCuisine: 'Catalan',
-  address: { '@type': 'PostalAddress', streetAddress: 'Carrer de Verdi, 00', addressLocality: 'Barcelona', postalCode: '08012', addressCountry: 'ES' },
+  address: { '@type': 'PostalAddress', streetAddress: 'Carrer de la Parellada, 00', addressLocality: 'Vilafranca del Penedès', postalCode: '08720', addressRegion: 'Barcelona', addressCountry: 'ES' },
   acceptsReservations: 'True',
   priceRange: '€€',
   openingHoursSpecification: [
