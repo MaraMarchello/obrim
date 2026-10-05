@@ -1,0 +1,93 @@
+import type { Dictionary } from './ca';
+
+export const es: Dictionary = {
+  meta: {
+    title: 'Estudi Aran — Peluquería y estética en Poblenou · Cita online',
+    description:
+      'Peluquería y estética en Poblenou. Coge cita online con tu profesional, recibe el recordatorio por WhatsApp y olvídate de llamar.',
+  },
+  nav: { services: 'Servicios', team: 'Equipo', book: 'Coger cita', info: 'Dónde estamos' },
+  hero: {
+    eyebrow: 'Peluquería y estética · Poblenou, Barcelona',
+    title: 'Tu cita, cuando a ti te va bien.',
+    subtitle: 'Elige servicio, profesional y hora. Lo confirmamos al instante y te lo recordamos por WhatsApp el día antes.',
+    cta: 'Coger cita',
+    secondary: 'Ver servicios y precios',
+    hours: 'Martes a sábado · 10:00–20:00',
+  },
+  services: {
+    eyebrow: 'Servicios y precios',
+    title: 'Sin sorpresas: el precio que ves es el que pagas',
+    body: 'Si tienes dudas sobre qué servicio necesitas, escríbenos por WhatsApp y te orientamos antes de la cita.',
+    minutes: 'min',
+    book: 'Coger cita',
+  },
+  team: {
+    eyebrow: 'El equipo',
+    title: 'Cuatro manos de confianza',
+    body: 'Puedes elegir con quién quieres la cita o dejar que te asignemos la primera persona disponible.',
+  },
+  book: {
+    eyebrow: 'Cita online',
+    title: 'Coge cita en un minuto',
+    body: 'Si no puedes venir, cancela o cambia la hora hasta 24 h antes desde el mismo mensaje de WhatsApp. Para servicios de más de 60 € pedimos una tarjeta de garantía.',
+  },
+  policy: {
+    title: 'Política de cancelación',
+    items: [
+      'Cancelación gratuita hasta 24 h antes de la cita.',
+      'Servicios de 60 € o más: garantía con tarjeta. No se cobra nada si vienes. Si no te presentas sin avisar, se cobra el 50 %.',
+      'Si llegas más de 15 minutos tarde, puede que haya que acortar o reprogramar el servicio.',
+    ],
+  },
+  info: {
+    eyebrow: 'Dónde estamos',
+    title: 'Carrer de Pujades, 00 · Poblenou',
+    hoursTitle: 'Horario',
+    hours: ['Martes a viernes · 10:00–20:00', 'Sábado · 10:00–18:00', 'Domingo y lunes cerrado'],
+    contactTitle: 'Contacto',
+    mapLabel: 'Abrir en Google Maps',
+    transport: 'Metro L4 Poblenou · Tram T4 Pere IV',
+  },
+  reviews: {
+    eyebrow: 'Opiniones',
+    items: [
+      { text: 'Vaig agafar cita a les 23 h des del sofà i l’endemà tenia el recordatori. Les metxes, perfectes.', author: 'Laia F.', source: 'Google' },
+      { text: 'Por fin una peluquería donde no tengo que llamar tres veces para que me cojan el teléfono.', author: 'Andrea S.', source: 'Google' },
+      { text: 'Booked online in English, chose Marc, got a reminder. Best beard trim in Poblenou.', author: 'Tom H.', source: 'Google' },
+    ],
+  },
+  footer: {
+    legal: ['Aviso legal', 'Privacidad', 'Cookies', 'Hojas de reclamación'],
+    demo: 'Esta es una web de demostración de Obrim. Estudi Aran no existe; las citas no se envían a ningún sitio.',
+  },
+  whatsapp: { label: 'Escríbenos por WhatsApp', message: '¡Hola Estudi Aran! Quería hacer una consulta.' },
+  booking: {
+    stepService: 'Servicio',
+    stepStaff: 'Profesional',
+    stepWhen: 'Día y hora',
+    stepDetails: 'Tus datos',
+    anyStaff: 'Primera persona disponible',
+    guests: 'Personas',
+    guestSingular: 'persona',
+    guestPlural: 'personas',
+    name: 'Nombre',
+    phone: 'Móvil',
+    notes: 'Comentarios',
+    notesPlaceholder: 'Alergias, largo del cabello, referencia de color…',
+    back: 'Atrás',
+    next: 'Continuar',
+    confirm: 'Confirmar la cita',
+    cardGuarantee: 'Servicio de 60 € o más: cita garantizada con tarjeta. No se cobra nada si vienes; 50 % si no te presentas sin avisar.',
+    reminder: 'Recibirás la confirmación ahora y un recordatorio por WhatsApp 24 h antes. Puedes cancelar o cambiar la hora desde el mismo mensaje.',
+    noSlots: 'No quedan horas este día. Prueba otro día u otra profesional.',
+    minutesShort: 'min',
+    successTitle: '¡Cita confirmada!',
+    successBody: 'Te esperamos en {brand}. Hemos enviado la confirmación a tu WhatsApp.',
+    whatsappPreview: '¡Hola {name}! Cita confirmada en {brand}: {detail}, {date} a las {time}. Ref. {ref}. Para cambiar o cancelar, responde a este mensaje.',
+    newBooking: 'Nueva cita',
+    demoNote: 'Demo: no se ha enviado ningún mensaje real.',
+    errorName: 'Escribe tu nombre.',
+    errorPhone: 'Escribe un móvil válido.',
+  },
+};

@@ -1,0 +1,27 @@
+---
+/**
+ * Sello "Web by Obrim" para el pie de las webs de clientes y demos.
+ */
+import { CONTACT } from '../config';
+import type { Lang } from '../i18n';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const text: Record<Lang, string> = {
+  ca: 'Web feta per',
+  es: 'Web hecha por',
+  en: 'Website by',
+};
+---
+
+<a
+  href={CONTACT.domain}
+  rel="noopener"
+  class="inline-flex items-center gap-2 text-xs text-muted hover:text-ink"
+>
+  <span>{text[lang]}</span>
+  <span class="font-display text-sm font-semibold text-ink">obrim<span class="text-accent">.</span></span>
+</a>

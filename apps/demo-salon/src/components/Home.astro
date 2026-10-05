@@ -1,0 +1,229 @@
+---
+import BookingWidget from '@obrim/ui/components/BookingWidget';
+import LangSwitcher from '@obrim/ui/components/LangSwitcher.astro';
+import ObrimBadge from '@obrim/ui/components/ObrimBadge.astro';
+import WhatsAppButton from '@obrim/ui/components/WhatsAppButton.astro';
+import { HTML_LANG, formatPrice, type Lang } from '@obrim/ui/i18n';
+import Base from '../layouts/Base.astro';
+import { useDictionary } from '../i18n';
+import { servicesFor, servicesGrouped, staffFor } from '../data/services';
+
+interface Props {
+  lang: Lang;
+}
+const { lang } = Astro.props;
+const t = useDictionary(lang);
+const BRAND = 'Estudi Aran';
+const ADDRESS = 'Carrer de Pujades, 00, 08005 Barcelona';
+const mapsHref = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(ADDRESS)}`;
+const services = servicesFor(lang);
+const grouped = servicesGrouped(lang);
+const staff = staffFor(lang);
+const hours = { start: '10:00', end: '20:00', closedDays: [0, 1] };
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'HairSalon',
+  name: BRAND,
+  address: { '@type': 'PostalAddress', streetAddress: 'Carrer de Pujades, 00', addressLocality: 'Barcelona', postalCode: '08005', addressCountry: 'ES' },
+  priceRange: '€€',
+  openingHoursSpecification: [
+    { '@type': 'OpeningHoursSpecification', dayOfWeek: ['Tuesday', 'Wednesday', 'Thursday', 'Friday'], opens: '10:00', closes: '20:00' },
+    { '@type': 'OpeningHoursSpecification', dayOfWeek: 'Saturday', opens: '10:00', closes: '18:00' },
+  ],
+};
+
+const nav = [
+  ['#serveis', t.nav.services],
+  ['#equip', t.nav.team],
+  ['#cita', t.nav.book],
+  ['#on-som', t.nav.info],
+];
+---
+
+<Base lang={lang} title={t.meta.title} description={t.meta.description} jsonLd={jsonLd}>
+  <header class="sticky top-0 z-30 border-b border-line/70 bg-paper/90 backdrop-blur">
+    <div class="container-x flex h-16 items-center justify-between gap-4">
+      <a href="#top" class="font-display text-2xl font-semibold tracking-tight text-accent">{BRAND}</a>
+      <nav class="hidden items-center gap-6 text-sm text-muted md:flex">
+        {nav.map(([href, label]) => <a href={href} class="hover:text-ink">{label}</a>)}
+      </nav>
+      <div class="flex items-center gap-3">
+        <LangSwitcher current={lang} path="/" />
+        <a href="#cita" class="btn-primary hidden !px-4 !py-2 sm:inline-flex">{t.hero.cta}</a>
+      </div>
+    </div>
+  </header>
+
+  <main id="top">
+    <section class="container-x grid gap-10 py-14 sm:py-20 lg:grid-cols-[1.1fr_1fr] lg:items-center">
+      <div>
+        <p class="eyebrow">{t.hero.eyebrow}</p>
+        <h1 class="h-display mt-4">{t.hero.title}</h1>
+        <p class="mt-6 max-w-lg text-lg text-muted">{t.hero.subtitle}</p>
+        <div class="mt-8 flex flex-wrap gap-3">
+          <a href="#cita" class="btn-primary">{t.hero.cta}</a>
+          <a href="#serveis" class="btn-secondary">{t.hero.secondary}</a>
+        </div>
+        <p class="mt-6 inline-flex items-center gap-2 text-sm text-muted">
+          <span aria-hidden="true" class="h-2 w-2 rounded-full bg-accent"></span>
+          {t.hero.hours}
+        </p>
+      </div>
+      <!-- TODO: sustituir por fotografía real del salón (ratio 4:5) -->
+      <div class="relative aspect-[4/5] w-full max-w-md overflow-hidden rounded-card bg-accent lg:justify-self-end" aria-hidden="true">
+        <div class="absolute inset-0 bg-[radial-gradient(circle_at_70%_20%,rgba(255,255,255,0.2),transparent_50%)]"></div>
+        <div class="absolute inset-x-6 bottom-6 grid grid-cols-2 gap-3">
+          {
+            staff.slice(0, 2).map((s) => (
+              <div class="rounded-xl bg-paper/95 p-3 text-sm">
+                <p class="font-display text-lg">{s.name}</p>
+                <p class="text-muted">{s.role}</p>
+              </div>
+            ))
+          }
+        </div>
+      </div>
+    </section>
+
+    <section id="serveis" class="border-y border-line bg-surface py-14 sm:py-20">
+      <div class="container-x">
+        <div class="max-w-2xl">
+          <p class="eyebrow">{t.services.eyebrow}</p>
+          <h2 class="h-section mt-3">{t.services.title}</h2>
+          <p class="mt-3 text-muted">{t.services.body}</p>
+        </div>
+        <div class="mt-10 grid gap-8 md:grid-cols-3">
+          {
+            grouped.map((g) => (
+              <div>
+                <h3 class="eyebrow border-b border-line pb-3">{g.group}</h3>
+                <ul class="divide-y divide-line">
+                  {g.services.map((s) => (
+                    <li class="flex items-baseline justify-between gap-3 py-3">
+                      <span>
+                        <span class="block font-medium">{s.name}</span>
+                        <span class="text-sm text-muted">
+                          {s.durationMinutes} {t.services.minutes}
+                        </span>
+                      </span>
+                      <span class="font-semibold tabular-nums">{formatPrice(s.price, lang)}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ))
+          }
+        </div>
+        <a href="#cita" class="btn-primary mt-10">{t.services.book}</a>
+      </div>
+    </section>
+
+    <section id="equip" class="container-x py-14 sm:py-20">
+      <div class="max-w-2xl">
+        <p class="eyebrow">{t.team.eyebrow}</p>
+        <h2 class="h-section mt-3">{t.team.title}</h2>
+        <p class="mt-3 text-muted">{t.team.body}</p>
+      </div>
+      <ul class="mt-10 grid grid-cols-2 gap-4 md:grid-cols-4">
+        {
+          staff.map((s) => (
+            <li class="card p-5">
+              <!-- TODO: foto real de cada profesional -->
+              <div class="flex h-20 w-20 items-center justify-center rounded-full bg-accent-soft font-display text-3xl text-accent" aria-hidden="true">
+                {s.name.charAt(0)}
+              </div>
+              <p class="mt-4 font-display text-xl">{s.name}</p>
+              <p class="text-sm text-muted">{s.role}</p>
+            </li>
+          ))
+        }
+      </ul>
+    </section>
+
+    <section id="cita" class="border-y border-line bg-accent-soft/40 py-14 sm:py-20">
+      <div class="container-x grid gap-10 lg:grid-cols-[1fr_1.3fr]">
+        <div>
+          <p class="eyebrow">{t.book.eyebrow}</p>
+          <h2 class="h-section mt-3">{t.book.title}</h2>
+          <p class="mt-3 text-muted">{t.book.body}</p>
+          <div class="mt-8 border-t border-line pt-6">
+            <h3 class="font-semibold">{t.policy.title}</h3>
+            <ul class="mt-3 grid gap-2 text-sm text-muted">
+              {
+                t.policy.items.map((p) => (
+                  <li class="flex gap-2">
+                    <span aria-hidden="true" class="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-accent" />
+                    {p}
+                  </li>
+                ))
+              }
+            </ul>
+          </div>
+        </div>
+        <BookingWidget
+          client:visible
+          mode="appointment"
+          brand={BRAND}
+          locale={HTML_LANG[lang]}
+          labels={t.booking}
+          hours={hours}
+          slotMinutes={30}
+          services={services}
+          staff={staff}
+          guaranteeFrom={60}
+        />
+      </div>
+    </section>
+
+    <section class="container-x py-14">
+      <p class="eyebrow">{t.reviews.eyebrow}</p>
+      <ul class="mt-6 grid gap-6 md:grid-cols-3">
+        {
+          t.reviews.items.map((r) => (
+            <li class="card p-5">
+              <p class="text-accent" aria-label="5/5">★★★★★</p>
+              <p class="mt-3">{r.text}</p>
+              <p class="mt-3 text-sm text-muted">
+                {r.author} · {r.source}
+              </p>
+            </li>
+          ))
+        }
+      </ul>
+    </section>
+
+    <section id="on-som" class="border-t border-line bg-surface">
+      <div class="container-x grid gap-10 py-14 sm:py-20 md:grid-cols-3">
+        <div>
+          <p class="eyebrow">{t.info.eyebrow}</p>
+          <h2 class="h-section mt-3">{t.info.title}</h2>
+          <p class="mt-3 text-muted">{t.info.transport}</p>
+          <a href={mapsHref} target="_blank" rel="noopener" class="btn-secondary mt-5">{t.info.mapLabel}</a>
+        </div>
+        <div>
+          <h3 class="font-semibold">{t.info.hoursTitle}</h3>
+          <ul class="mt-3 grid gap-1 text-muted">{t.info.hours.map((h) => <li>{h}</li>)}</ul>
+        </div>
+        <div>
+          <h3 class="font-semibold">{t.info.contactTitle}</h3>
+          <ul class="mt-3 grid gap-1 text-muted">
+            <li><a href="tel:+34600000000" class="hover:text-ink">+34 600 000 000</a></li>
+            <li><a href="mailto:hola@estudiaran.cat" class="hover:text-ink">hola@estudiaran.cat</a></li>
+            <li>@estudiaran</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="border-t border-line py-10">
+    <div class="container-x flex flex-wrap items-center justify-between gap-4 text-sm text-muted">
+      <ul class="flex flex-wrap gap-4">{t.footer.legal.map((l) => <li><a href="#" class="hover:text-ink">{l}</a></li>)}</ul>
+      <ObrimBadge lang={lang} />
+    </div>
+    <p class="container-x mt-6 text-xs text-muted/80">{t.footer.demo}</p>
+  </footer>
+
+  <WhatsAppButton message={t.whatsapp.message} label={t.whatsapp.label} />
+</Base>

@@ -1,0 +1,35 @@
+---
+import { CONTACT } from '@obrim/ui/config';
+import type { Dictionary } from '../i18n';
+
+interface Props {
+  t: Dictionary;
+}
+const { t } = Astro.props;
+---
+
+<section id="about" class="container-x grid gap-10 py-16 sm:py-24 lg:grid-cols-[auto_1fr] lg:gap-16">
+  <div class="flex flex-col items-start gap-4">
+    <!-- TODO: sustituir por una foto real (cuadrada, ~600px) en public/marat.jpg -->
+    <div
+      class="flex h-40 w-40 items-center justify-center rounded-3xl bg-ink font-display text-6xl text-paper sm:h-48 sm:w-48"
+      role="img"
+      aria-label={CONTACT.founder.name}
+    >
+      M
+    </div>
+    <ul class="flex flex-wrap gap-2 lg:max-w-48">
+      {t.about.facts.map((fact) => <li class="pill">{fact}</li>)}
+    </ul>
+  </div>
+  <div class="max-w-2xl">
+    <p class="eyebrow">{t.about.eyebrow}</p>
+    <h2 class="h-section mt-3">{t.about.title}</h2>
+    <div class="mt-5 grid gap-4 text-muted">
+      {t.about.body.map((p) => <p>{p}</p>)}
+    </div>
+    <a href={CONTACT.github} target="_blank" rel="noopener" class="mt-6 inline-flex items-center gap-2 text-sm font-medium text-ink underline-offset-4 hover:underline">
+      {t.about.github} →
+    </a>
+  </div>
+</section>

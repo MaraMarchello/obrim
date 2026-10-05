@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://obrim.cat/sitemap-index.xml

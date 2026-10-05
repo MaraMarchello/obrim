@@ -1,0 +1,24 @@
+{
+  "name": "@obrim/audit",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Auditoría rápida de la presencia web de un negocio local con informe en PDF",
+  "bin": {
+    "obrim-audit": "./src/cli.ts"
+  },
+  "scripts": {
+    "audit:site": "tsx src/cli.ts",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "cheerio": "^1.0.0",
+    "pdfkit": "^0.15.0"
+  },
+  "devDependencies": {
+    "@types/node": "^22.0.0",
+    "@types/pdfkit": "^0.13.5",
+    "tsx": "^4.19.0",
+    "typescript": "^5.6.0"
+  }
+}

@@ -1,0 +1,54 @@
+---
+import WhatsAppButton from '@obrim/ui/components/WhatsAppButton.astro';
+import { CONTACT } from '@obrim/ui/config';
+import type { Lang } from '@obrim/ui/i18n';
+import Base from '../layouts/Base.astro';
+import { useDictionary } from '../i18n';
+import Header from './Header.astro';
+import Hero from './Hero.astro';
+import Pains from './Pains.astro';
+import Demos from './Demos.astro';
+import HowItWorks from './HowItWorks.astro';
+import Pricing from './Pricing.astro';
+import AuditForm from './AuditForm.astro';
+import About from './About.astro';
+import Faq from './Faq.astro';
+import Footer from './Footer.astro';
+
+interface Props {
+  lang: Lang;
+}
+const { lang } = Astro.props;
+const t = useDictionary(lang);
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'ProfessionalService',
+  name: CONTACT.brand,
+  url: CONTACT.domain,
+  email: CONTACT.email,
+  telephone: `+${CONTACT.whatsappNumber}`,
+  description: t.meta.description,
+  areaServed: { '@type': 'City', name: 'Barcelona' },
+  address: { '@type': 'PostalAddress', addressLocality: 'Barcelona', addressRegion: 'Catalunya', addressCountry: 'ES' },
+  founder: { '@type': 'Person', name: CONTACT.founder.name, sameAs: [CONTACT.github] },
+  priceRange: '€€',
+  knowsLanguage: ['ca', 'es', 'en'],
+};
+---
+
+<Base lang={lang} title={t.meta.title} description={t.meta.description} jsonLd={jsonLd}>
+  <Header lang={lang} t={t} />
+  <main>
+    <Hero t={t} />
+    <Pains t={t} />
+    <Demos lang={lang} t={t} />
+    <HowItWorks t={t} />
+    <Pricing t={t} />
+    <AuditForm t={t} />
+    <About t={t} />
+    <Faq t={t} />
+  </main>
+  <Footer lang={lang} t={t} />
+  <WhatsAppButton message={t.whatsapp.message} label={t.whatsapp.label} />
+</Base>

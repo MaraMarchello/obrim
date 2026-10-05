@@ -1,0 +1,82 @@
+/* Tokens compartidos de la marca Obrim. Cada app puede sobrescribir --color-accent. */
+@theme {
+  --color-ink: #16150f;
+  --color-paper: #f8f5ee;
+  --color-surface: #ffffff;
+  --color-muted: #6b675d;
+  --color-line: #e3ddd1;
+  --color-accent: #c84b31;
+  --color-accent-strong: #a63d27;
+  --color-accent-soft: #f7e4de;
+  --color-moss: #3e6b4f;
+  --color-moss-soft: #e3eee6;
+
+  --font-sans: ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial,
+    'Noto Sans', sans-serif;
+  --font-display: Georgia, 'Times New Roman', 'Noto Serif', serif;
+
+  --radius-card: 1rem;
+  --shadow-none: none;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+  }
+  body {
+    @apply bg-paper text-ink font-sans antialiased;
+  }
+  /* Los anclajes no quedan ocultos bajo la cabecera fija */
+  [id] {
+    scroll-margin-top: 5rem;
+  }
+  :focus-visible {
+    @apply outline-2 outline-offset-2 outline-accent;
+  }
+  ::selection {
+    @apply bg-accent-soft;
+  }
+}
+
+@layer components {
+  .container-x {
+    @apply mx-auto w-full max-w-6xl px-5 sm:px-8;
+  }
+  .btn,
+  .btn-primary,
+  .btn-secondary,
+  .btn-ghost {
+    @apply inline-flex items-center justify-center gap-2 rounded-full px-5 py-3 text-sm font-semibold transition-colors disabled:cursor-not-allowed disabled:opacity-50;
+  }
+  .btn-primary {
+    @apply bg-accent text-white hover:bg-accent-strong;
+  }
+  .btn-secondary {
+    @apply border border-ink/15 bg-surface text-ink hover:border-ink/40;
+  }
+  .btn-ghost {
+    @apply text-ink hover:bg-ink/5;
+  }
+  .card {
+    @apply rounded-card border border-line bg-surface;
+  }
+  .eyebrow {
+    @apply text-xs font-semibold uppercase tracking-[0.18em] text-muted;
+  }
+  .h-display {
+    @apply font-display text-4xl leading-[1.05] tracking-tight sm:text-5xl lg:text-6xl;
+  }
+  .h-section {
+    @apply font-display text-3xl leading-tight tracking-tight sm:text-4xl;
+  }
+  .field {
+    @apply w-full rounded-xl border border-line bg-surface px-4 py-3 text-base text-ink placeholder:text-muted/70 focus:border-accent focus:outline-none;
+  }
+  .label {
+    @apply mb-1.5 block text-sm font-medium text-ink;
+  }
+  .pill {
+    @apply inline-flex items-center rounded-full border border-line bg-surface px-3 py-1 text-xs font-medium text-muted;
+  }
+}

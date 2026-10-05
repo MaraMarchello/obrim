@@ -1,0 +1,93 @@
+import type { Dictionary } from './ca';
+
+export const en: Dictionary = {
+  meta: {
+    title: 'Estudi Aran — Hair & beauty in Poblenou · Book online',
+    description:
+      'Hair and beauty salon in Poblenou. Book online with your stylist, get a WhatsApp reminder and forget about phoning.',
+  },
+  nav: { services: 'Services', team: 'Team', book: 'Book', info: 'Find us' },
+  hero: {
+    eyebrow: 'Hair & beauty · Poblenou, Barcelona',
+    title: 'Your appointment, whenever suits you.',
+    subtitle: 'Pick a service, a stylist and a time. We confirm instantly and remind you on WhatsApp the day before.',
+    cta: 'Book an appointment',
+    secondary: 'See services & prices',
+    hours: 'Tuesday to Saturday · 10:00–20:00',
+  },
+  services: {
+    eyebrow: 'Services & prices',
+    title: 'No surprises: the price you see is the price you pay',
+    body: 'Not sure which service you need? Message us on WhatsApp and we will advise you before your appointment.',
+    minutes: 'min',
+    book: 'Book',
+  },
+  team: {
+    eyebrow: 'The team',
+    title: 'Four pairs of hands you can trust',
+    body: 'Choose who you want your appointment with, or let us assign the first available person.',
+  },
+  book: {
+    eyebrow: 'Online booking',
+    title: 'Book in under a minute',
+    body: 'Cannot make it? Cancel or reschedule up to 24 h before from the same WhatsApp message. For services over €60 we ask for a card guarantee.',
+  },
+  policy: {
+    title: 'Cancellation policy',
+    items: [
+      'Free cancellation up to 24 h before your appointment.',
+      'Services of €60 or more: card guarantee. Nothing is charged if you show up. No-shows without notice are charged 50%.',
+      'If you arrive more than 15 minutes late we may need to shorten or reschedule the service.',
+    ],
+  },
+  info: {
+    eyebrow: 'Find us',
+    title: 'Carrer de Pujades, 00 · Poblenou',
+    hoursTitle: 'Opening hours',
+    hours: ['Tuesday to Friday · 10:00–20:00', 'Saturday · 10:00–18:00', 'Closed Sunday and Monday'],
+    contactTitle: 'Contact',
+    mapLabel: 'Open in Google Maps',
+    transport: 'Metro L4 Poblenou · Tram T4 Pere IV',
+  },
+  reviews: {
+    eyebrow: 'Reviews',
+    items: [
+      { text: 'Vaig agafar cita a les 23 h des del sofà i l’endemà tenia el recordatori. Les metxes, perfectes.', author: 'Laia F.', source: 'Google' },
+      { text: 'Por fin una peluquería donde no tengo que llamar tres veces para que me cojan el teléfono.', author: 'Andrea S.', source: 'Google' },
+      { text: 'Booked online in English, chose Marc, got a reminder. Best beard trim in Poblenou.', author: 'Tom H.', source: 'Google' },
+    ],
+  },
+  footer: {
+    legal: ['Legal notice', 'Privacy', 'Cookies', 'Complaint forms'],
+    demo: 'This is an Obrim demo website. Estudi Aran does not exist; appointments are not sent anywhere.',
+  },
+  whatsapp: { label: 'Message us on WhatsApp', message: 'Hi Estudi Aran! I have a question.' },
+  booking: {
+    stepService: 'Service',
+    stepStaff: 'Stylist',
+    stepWhen: 'Date & time',
+    stepDetails: 'Your details',
+    anyStaff: 'First available',
+    guests: 'People',
+    guestSingular: 'person',
+    guestPlural: 'people',
+    name: 'Name',
+    phone: 'Mobile',
+    notes: 'Comments',
+    notesPlaceholder: 'Allergies, hair length, colour reference…',
+    back: 'Back',
+    next: 'Continue',
+    confirm: 'Confirm appointment',
+    cardGuarantee: 'Service of €60 or more: appointment guaranteed with a card. Nothing is charged if you show up; 50% for no-shows without notice.',
+    reminder: 'You will get the confirmation now and a WhatsApp reminder 24 h before. Cancel or reschedule from the same message.',
+    noSlots: 'No slots left on this day. Try another day or another stylist.',
+    minutesShort: 'min',
+    successTitle: 'Appointment confirmed!',
+    successBody: 'See you at {brand}. We have sent the confirmation to your WhatsApp.',
+    whatsappPreview: 'Hi {name}! Appointment confirmed at {brand}: {detail}, {date} at {time}. Ref. {ref}. To change or cancel, reply to this message.',
+    newBooking: 'New appointment',
+    demoNote: 'Demo: no real message was sent.',
+    errorName: 'Please enter your name.',
+    errorPhone: 'Please enter a valid mobile number.',
+  },
+};

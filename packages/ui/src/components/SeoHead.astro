@@ -1,0 +1,36 @@
+---
+import { LOCALES, localizePath, stripLang, type Lang } from '../i18n';
+
+interface Props {
+  lang: Lang;
+  title: string;
+  description: string;
+  site: string;
+  siteName: string;
+  themeColor?: string;
+  jsonLd?: Record<string, unknown>;
+}
+
+const { lang, title, description, site, siteName, themeColor = '#f8f5ee', jsonLd } = Astro.props;
+const path = stripLang(Astro.url.pathname);
+const abs = (l: Lang) => new URL(localizePath(path, l), site).toString();
+const ogLocale: Record<Lang, string> = { ca: 'ca_ES', es: 'es_ES', en: 'en_GB' };
+---
+
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>{title}</title>
+<meta name="description" content={description} />
+<link rel="canonical" href={abs(lang)} />
+{LOCALES.map((l) => <link rel="alternate" hreflang={l} href={abs(l)} />)}
+<link rel="alternate" hreflang="x-default" href={abs('ca')} />
+<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+<meta name="theme-color" content={themeColor} />
+<meta property="og:type" content="website" />
+<meta property="og:title" content={title} />
+<meta property="og:description" content={description} />
+<meta property="og:url" content={abs(lang)} />
+<meta property="og:locale" content={ogLocale[lang]} />
+<meta property="og:site_name" content={siteName} />
+<meta name="twitter:card" content="summary" />
+{jsonLd && <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />}

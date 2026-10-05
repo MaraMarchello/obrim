@@ -1,0 +1,11 @@
+@import 'tailwindcss';
+@import '../../../../packages/ui/src/styles/theme.css';
+@source '../../../../packages/ui/src';
+
+/* Identidad propia de la demo: verde bosque sobre papel cálido */
+@theme {
+  --color-accent: #3e6b4f;
+  --color-accent-strong: #2f553d;
+  --color-accent-soft: #e3eee6;
+  --color-paper: #f6f3ea;
+}

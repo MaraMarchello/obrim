@@ -1,0 +1,35 @@
+---
+import { LOCALES, LANG_NAMES, localizePath, type Lang } from '../i18n';
+
+interface Props {
+  current: Lang;
+  /** Ruta sin prefijo de idioma (por defecto, la actual) */
+  path?: string;
+  class?: string;
+}
+
+const { current, path, class: className = '' } = Astro.props;
+const basePath = path ?? Astro.url.pathname;
+---
+
+<nav aria-label="Idioma" class={`flex items-center gap-1 text-sm ${className}`}>
+  {
+    LOCALES.map((lang, i) => (
+      <>
+        {i > 0 && <span aria-hidden="true" class="text-line">·</span>}
+        <a
+          href={localizePath(basePath, lang)}
+          hreflang={lang}
+          lang={lang}
+          aria-current={lang === current ? 'page' : undefined}
+          class={`rounded-md px-1.5 py-0.5 uppercase tracking-wide ${
+            lang === current ? 'font-semibold text-ink' : 'text-muted hover:text-ink'
+          }`}
+          title={LANG_NAMES[lang]}
+        >
+          {lang}
+        </a>
+      </>
+    ))
+  }
+</nav>

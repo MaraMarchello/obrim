@@ -1,0 +1,35 @@
+---
+import { CONTACT } from '@obrim/ui/config';
+import { localizePath, type Lang } from '@obrim/ui/i18n';
+import Base from '../layouts/Base.astro';
+import { useDictionary } from '../i18n';
+import Footer from './Footer.astro';
+import type { LegalKey } from '../legal';
+
+interface Props {
+  lang: Lang;
+  page: LegalKey;
+}
+const { lang, page } = Astro.props;
+const t = useDictionary(lang);
+const content = t.legal[page];
+const updated = new Intl.DateTimeFormat(lang, { dateStyle: 'long' }).format(new Date('2026-10-06'));
+const fill = (s: string) => s.replace('{founder}', CONTACT.founder.name).replaceAll('{email}', CONTACT.email);
+---
+
+<Base lang={lang} title={`${content.title} · ${CONTACT.brand}`} description={content.title}>
+  <header class="border-b border-line">
+    <div class="container-x flex h-16 items-center justify-between">
+      <a href={localizePath('/', lang)} class="font-display text-2xl font-semibold">obrim<span class="text-accent">.</span></a>
+      <a href={localizePath('/', lang)} class="text-sm text-muted hover:text-ink">← {t.legal.back}</a>
+    </div>
+  </header>
+  <main class="container-x max-w-3xl py-16">
+    <h1 class="h-section">{content.title}</h1>
+    <p class="mt-2 text-sm text-muted">{t.legal.updated}: {updated}</p>
+    <div class="mt-8 grid gap-4 text-ink/90">
+      {content.body.map((p) => <p>{fill(p)}</p>)}
+    </div>
+  </main>
+  <Footer lang={lang} t={t} />
+</Base>

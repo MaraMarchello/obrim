@@ -1,0 +1,19 @@
+{
+  "name": "@obrim/ui",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    "./config": "./src/config.ts",
+    "./i18n": "./src/i18n/index.ts",
+    "./booking/slots": "./src/booking/slots.ts",
+    "./components/BookingWidget": "./src/components/BookingWidget.tsx",
+    "./components/OrderWidget": "./src/components/OrderWidget.tsx",
+    "./components/*": "./src/components/*",
+    "./styles/*": "./src/styles/*"
+  },
+  "peerDependencies": {
+    "astro": "^5.0.0",
+    "preact": "^10.0.0"
+  }
+}

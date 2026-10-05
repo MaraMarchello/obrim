@@ -1,0 +1,11 @@
+@import 'tailwindcss';
+@import '../../../../packages/ui/src/styles/theme.css';
+@source '../../../../packages/ui/src';
+
+/* Identidad propia de la demo: ciruela sobre papel rosado */
+@theme {
+  --color-accent: #8a4b6b;
+  --color-accent-strong: #6f3a56;
+  --color-accent-soft: #f3e4ec;
+  --color-paper: #faf6f7;
+}

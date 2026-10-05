@@ -1,0 +1,185 @@
+---
+import BookingWidget from '@obrim/ui/components/BookingWidget';
+import OrderWidget from '@obrim/ui/components/OrderWidget';
+import LangSwitcher from '@obrim/ui/components/LangSwitcher.astro';
+import ObrimBadge from '@obrim/ui/components/ObrimBadge.astro';
+import WhatsAppButton from '@obrim/ui/components/WhatsAppButton.astro';
+import { HTML_LANG, type Lang } from '@obrim/ui/i18n';
+import Base from '../layouts/Base.astro';
+import { useDictionary } from '../i18n';
+import { menuFor } from '../data/menu';
+
+interface Props {
+  lang: Lang;
+}
+const { lang } = Astro.props;
+const t = useDictionary(lang);
+const menu = menuFor(lang);
+const BRAND = 'Can Roure';
+const ADDRESS = 'Carrer de Verdi, 00, 08012 Barcelona';
+const mapsHref = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(ADDRESS)}`;
+
+/** Horario partido; cerrado los lunes */
+const hours = {
+  start: '13:00',
+  end: '23:00',
+  closedDays: [1],
+  ranges: [
+    { start: '13:00', end: '16:00' },
+    { start: '20:00', end: '23:00' },
+  ],
+};
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Restaurant',
+  name: BRAND,
+  servesCuisine: 'Catalan',
+  address: { '@type': 'PostalAddress', streetAddress: 'Carrer de Verdi, 00', addressLocality: 'Barcelona', postalCode: '08012', addressCountry: 'ES' },
+  acceptsReservations: 'True',
+  priceRange: '€€',
+  openingHoursSpecification: [
+    { '@type': 'OpeningHoursSpecification', dayOfWeek: ['Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'], opens: '13:00', closes: '16:00' },
+    { '@type': 'OpeningHoursSpecification', dayOfWeek: ['Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'], opens: '20:00', closes: '23:00' },
+    { '@type': 'OpeningHoursSpecification', dayOfWeek: 'Sunday', opens: '13:00', closes: '16:00' },
+  ],
+};
+
+const nav = [
+  ['#carta', t.nav.menu],
+  ['#reserva', t.nav.reserve],
+  ['#emportar', t.nav.order],
+  ['#on-som', t.nav.info],
+];
+---
+
+<Base lang={lang} title={t.meta.title} description={t.meta.description} jsonLd={jsonLd}>
+  <header class="sticky top-0 z-30 border-b border-line/70 bg-paper/90 backdrop-blur">
+    <div class="container-x flex h-16 items-center justify-between gap-4">
+      <a href="#top" class="font-display text-2xl font-semibold tracking-tight text-accent">{BRAND}</a>
+      <nav class="hidden items-center gap-6 text-sm text-muted md:flex">
+        {nav.map(([href, label]) => <a href={href} class="hover:text-ink">{label}</a>)}
+      </nav>
+      <div class="flex items-center gap-3">
+        <LangSwitcher current={lang} path="/" />
+        <a href="#reserva" class="btn-primary hidden !px-4 !py-2 sm:inline-flex">{t.hero.reserve}</a>
+      </div>
+    </div>
+  </header>
+
+  <main id="top">
+    <section class="container-x grid gap-10 py-14 sm:py-20 lg:grid-cols-[1.1fr_1fr] lg:items-center">
+      <div>
+        <p class="eyebrow">{t.hero.eyebrow}</p>
+        <h1 class="h-display mt-4">{t.hero.title}</h1>
+        <p class="mt-6 max-w-lg text-lg text-muted">{t.hero.subtitle}</p>
+        <div class="mt-8 flex flex-wrap gap-3">
+          <a href="#reserva" class="btn-primary">{t.hero.reserve}</a>
+          <a href="#emportar" class="btn-secondary">{t.hero.order}</a>
+        </div>
+        <p class="mt-6 inline-flex items-center gap-2 text-sm text-muted">
+          <span aria-hidden="true" class="h-2 w-2 rounded-full bg-accent"></span>
+          {t.hero.openNow}
+        </p>
+      </div>
+      <!-- TODO: sustituir por fotografía real del local (ratio 4:5) -->
+      <div class="relative aspect-[4/5] w-full max-w-md overflow-hidden rounded-card bg-accent lg:justify-self-end" aria-hidden="true">
+        <div class="absolute inset-0 bg-[radial-gradient(circle_at_30%_20%,rgba(255,255,255,0.18),transparent_50%)]"></div>
+        <div class="absolute inset-x-6 bottom-6 rounded-xl bg-paper/95 p-4 text-sm">
+          <p class="font-display text-lg">{menu.items[4].name}</p>
+          <p class="text-muted">{menu.items[4].description}</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="carta" class="border-y border-line bg-surface py-14 sm:py-20">
+      <div class="container-x">
+        <div class="max-w-2xl">
+          <p class="eyebrow">{t.menu.eyebrow}</p>
+          <h2 class="h-section mt-3">{t.menu.title}</h2>
+          <p class="mt-3 text-muted">{t.menu.body}</p>
+        </div>
+        <div class="mt-10" id="emportar">
+          <OrderWidget
+            client:visible
+            brand={BRAND}
+            locale={HTML_LANG[lang]}
+            labels={t.order}
+            categories={menu.categories}
+            items={menu.items}
+            allergenNames={menu.allergenNames}
+            hours={hours}
+          />
+        </div>
+      </div>
+    </section>
+
+    <section id="reserva" class="container-x grid gap-10 py-14 sm:py-20 lg:grid-cols-[1fr_1.2fr]">
+      <div>
+        <p class="eyebrow">{t.reserve.eyebrow}</p>
+        <h2 class="h-section mt-3">{t.reserve.title}</h2>
+        <p class="mt-3 text-muted">{t.reserve.body}</p>
+      </div>
+      <BookingWidget
+        client:visible
+        mode="table"
+        brand={BRAND}
+        locale={HTML_LANG[lang]}
+        labels={t.booking}
+        hours={hours}
+        slotMinutes={30}
+        maxGuests={10}
+      />
+    </section>
+
+    <section class="border-y border-line bg-accent-soft/50 py-14">
+      <div class="container-x">
+        <p class="eyebrow">{t.reviews.eyebrow}</p>
+        <ul class="mt-6 grid gap-6 md:grid-cols-3">
+          {
+            t.reviews.items.map((r) => (
+              <li class="card p-5">
+                <p class="text-accent" aria-label="5/5">★★★★★</p>
+                <p class="mt-3">{r.text}</p>
+                <p class="mt-3 text-sm text-muted">
+                  {r.author} · {r.source}
+                </p>
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+    </section>
+
+    <section id="on-som" class="container-x grid gap-10 py-14 sm:py-20 md:grid-cols-3">
+      <div class="md:col-span-1">
+        <p class="eyebrow">{t.info.eyebrow}</p>
+        <h2 class="h-section mt-3">{t.info.title}</h2>
+        <p class="mt-3 text-muted">{t.info.transport}</p>
+        <a href={mapsHref} target="_blank" rel="noopener" class="btn-secondary mt-5">{t.info.mapLabel}</a>
+      </div>
+      <div>
+        <h3 class="font-semibold">{t.info.hoursTitle}</h3>
+        <ul class="mt-3 grid gap-1 text-muted">{t.info.hours.map((h) => <li>{h}</li>)}</ul>
+      </div>
+      <div>
+        <h3 class="font-semibold">{t.info.contactTitle}</h3>
+        <ul class="mt-3 grid gap-1 text-muted">
+          <li><a href="tel:+34600000000" class="hover:text-ink">+34 600 000 000</a></li>
+          <li><a href="mailto:hola@canroure.cat" class="hover:text-ink">hola@canroure.cat</a></li>
+          <li>@canroure</li>
+        </ul>
+      </div>
+    </section>
+  </main>
+
+  <footer class="border-t border-line bg-surface py-10">
+    <div class="container-x flex flex-wrap items-center justify-between gap-4 text-sm text-muted">
+      <ul class="flex flex-wrap gap-4">{t.footer.legal.map((l) => <li><a href="#" class="hover:text-ink">{l}</a></li>)}</ul>
+      <ObrimBadge lang={lang} />
+    </div>
+    <p class="container-x mt-6 text-xs text-muted/80">{t.footer.demo}</p>
+  </footer>
+
+  <WhatsAppButton message={t.whatsapp.message} label={t.whatsapp.label} />
+</Base>

@@ -1,0 +1,12 @@
+---
+import LegalPage from '../../../components/LegalPage.astro';
+import { legalStaticPaths, type LegalKey } from '../../../legal';
+
+export function getStaticPaths() {
+  return legalStaticPaths();
+}
+
+const { key } = Astro.props as { key: LegalKey };
+---
+
+<LegalPage lang="es" page={key} />

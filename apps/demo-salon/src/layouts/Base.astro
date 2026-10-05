@@ -1,0 +1,33 @@
+---
+import '../styles/global.css';
+import SeoHead from '@obrim/ui/components/SeoHead.astro';
+import { HTML_LANG, type Lang } from '@obrim/ui/i18n';
+
+interface Props {
+  lang: Lang;
+  title: string;
+  description: string;
+  jsonLd?: Record<string, unknown>;
+}
+
+const { lang, title, description, jsonLd } = Astro.props;
+---
+
+<!doctype html>
+<html lang={HTML_LANG[lang]}>
+  <head>
+    <SeoHead
+      lang={lang}
+      title={title}
+      description={description}
+      site={Astro.site?.toString() ?? 'https://salo.obrim.cat'}
+      siteName="Estudi Aran"
+      themeColor="#8a4b6b"
+      jsonLd={jsonLd}
+    />
+    <meta name="robots" content="noindex" />
+  </head>
+  <body class="min-h-dvh">
+    <slot />
+  </body>
+</html>

@@ -1,0 +1,79 @@
+---
+import { CONTACT } from '@obrim/ui/config';
+import type { Dictionary } from '../i18n';
+
+interface Props {
+  t: Dictionary;
+}
+const { t } = Astro.props;
+const f = t.audit.fields;
+---
+
+<section id="audit" class="border-y border-line bg-accent-soft/40 py-16 sm:py-24">
+  <div class="container-x grid gap-10 lg:grid-cols-[1fr_1.1fr] lg:items-start">
+    <div>
+      <p class="eyebrow">{t.audit.eyebrow}</p>
+      <h2 class="h-section mt-3">{t.audit.title}</h2>
+      <p class="mt-4 text-muted">{t.audit.body}</p>
+    </div>
+
+    <form
+      id="audit-form"
+      class="card grid gap-4 p-6 sm:p-8"
+      data-wa={CONTACT.whatsappNumber}
+      data-template={t.audit.messageTemplate}
+      novalidate
+    >
+      <div>
+        <label class="label" for="af-business">{f.business}</label>
+        <input id="af-business" name="business" class="field" required autocomplete="organization" />
+      </div>
+      <div class="grid gap-4 sm:grid-cols-2">
+        <div>
+          <label class="label" for="af-type">{f.type}</label>
+          <select id="af-type" name="type" class="field">
+            {f.types.map((type) => <option value={type}>{type}</option>)}
+          </select>
+        </div>
+        <div>
+          <label class="label" for="af-area">{f.area}</label>
+          <input id="af-area" name="area" class="field" required autocomplete="address-level2" />
+        </div>
+      </div>
+      <div class="grid gap-4 sm:grid-cols-2">
+        <div>
+          <label class="label" for="af-phone">{f.phone}</label>
+          <input id="af-phone" name="phone" class="field" type="tel" inputmode="tel" autocomplete="tel" placeholder="+34 6__ ___ ___" />
+        </div>
+        <div>
+          <label class="label" for="af-website">
+            {f.website} <span class="font-normal text-muted">({f.optional})</span>
+          </label>
+          <input id="af-website" name="website" class="field" type="url" inputmode="url" placeholder="https://" />
+        </div>
+      </div>
+      <button type="submit" class="btn-primary mt-2 w-full">{t.audit.submit}</button>
+      <p class="text-xs text-muted">{t.audit.note}</p>
+    </form>
+  </div>
+</section>
+
+<script>
+  const form = document.getElementById('audit-form') as HTMLFormElement | null;
+  form?.addEventListener('submit', (event) => {
+    event.preventDefault();
+    const data = new FormData(form);
+    const value = (key: string) => String(data.get(key) ?? '').trim();
+    if (!value('business') || !value('area')) {
+      form.reportValidity();
+      return;
+    }
+    const message = (form.dataset.template ?? '')
+      .replace('{business}', value('business'))
+      .replace('{type}', value('type'))
+      .replace('{area}', value('area'))
+      .replace('{website}', value('website') || '—');
+    const url = `https://wa.me/${form.dataset.wa}?text=${encodeURIComponent(message)}`;
+    window.open(url, '_blank', 'noopener');
+  });
+</script>
